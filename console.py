@@ -12,7 +12,6 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
-
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
@@ -30,7 +29,6 @@ def parse(arg):
         retl.append(curly_braces.group())
         return retl
 
-
 class HBNBCommand(cmd.Cmd):
     """Class for the command interpreter"""
 
@@ -46,11 +44,11 @@ class HBNBCommand(cmd.Cmd):
     }
 
     def emptyline(self):
-        """Do nothing upon receiving empty line."""
+        """Do nothing upon receiving an empty line."""
         pass
 
     def default(self, arg):
-        """Default behavior of cmd module when there is valid input"""
+        """Catch commands if nothing else matches then."""
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -71,17 +69,16 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_quit(self, arg):
-        """Quit command to exit program."""
+        """Quit command to exit the program."""
         return True
 
     def do_EOF(self, arg):
-        """EOF signal to exit program."""
+        """EOF signal to exit the program."""
         print("")
         return True
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel
-        """
+        """Create a new class instance and print its id"""
         argl = parse(arg)
         if len(argl) == 0:
             print("** class name missing **")
@@ -92,8 +89,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on class and id
-        """
+        """Display the string representation of a class instance of a given id"""
         argl = parse(arg)
         objdict = storage.all()
         if len(argl) == 0:
@@ -108,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
             print(objdict["{}.{}".format(argl[0], argl[1])])
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id"""
+        """Delete a class instance of a given id"""
         argl = parse(arg)
         objdict = storage.all()
         if len(argl) == 0:
@@ -124,8 +120,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or 
-        not on the class name"""
+        """Display string representations of all instances of a given class"""
         argl = parse(arg)
         if len(argl) > 0 and argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -138,8 +133,8 @@ class HBNBCommand(cmd.Cmd):
                     objl.append(obj.__str__())
             print(objl)
 
-      def do_count(self, arg):
-        """Retrieve number of instances of a given class."""
+    def do_count(self, arg):
+        """Retrieve the number of instances of a given class."""
         argl = parse(arg)
         count = 0
         for obj in storage.all().values():
@@ -148,8 +143,8 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by 
-        adding or updating attribute"""
+        """Update a class instance of a given id by or updating
+        a given attribute key"""
         argl = parse(arg)
         objdict = storage.all()
 
