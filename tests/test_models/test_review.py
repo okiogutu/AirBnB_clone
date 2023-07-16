@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 """ testing Review """
 import os
 import models
@@ -10,6 +11,69 @@ from models.review import Review
 
 class TestReview(unittest.TestCase):
 	"""Unit tests for reviews"""
+=======
+"""Unttest module for the Review Class"""
+import unittest
+import models
+import os
+from datetime import datetime
+from time import sleep
+from models.amenity import Amenity
+
+class TestReview_save(unittest.TestCase):
+    """testing save method of the Review class."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        rv = Review()
+        sleep(0.05)
+        first_updated_at = rv.updated_at
+        rv.save()
+        self.assertLess(first_updated_at, rv.updated_at)
+
+    def test_two_saves(self):
+        rv = Review()
+        sleep(0.05)
+        first_updated_at = rv.updated_at
+        rv.save()
+        second_updated_at = rv.updated_at
+        self.assertLess(first_updated_at, second_updated_at)
+        sleep(0.05)
+        rv.save()
+        self.assertLess(second_updated_at, rv.updated_at)
+
+    def test_save_with_arg(self):
+        rv = Review()
+        with self.assertRaises(TypeError):
+            rv.save(None)
+
+    def test_save_updates_file(self):
+        rv = Review()
+        rv.save()
+        rvid = "Review." + rv.id
+        with open("file.json", "r") as f:
+            self.assertIn(rvid, f.read())
+
+class TestReview_instantiation(unittest.TestCase):
+    """testing instantiation of the Review class."""
+
+>>>>>>> 8b4a7ab1d5f2da79ec031db68409da71b8bd5bef
     def test_no_args_instantiates(self):
         self.assertEqual(Review, type(Review()))
 
@@ -88,6 +152,7 @@ class TestReview(unittest.TestCase):
         with self.assertRaises(TypeError):
             Review(id=None, created_at=None, updated_at=None)
 
+<<<<<<< HEAD
 
 class TestReview_save(unittest.TestCase):
     """Unittests for review save method"""
@@ -141,6 +206,11 @@ class TestReview_save(unittest.TestCase):
 
 class TestReview_to_dict(unittest.TestCase):
     """Unittests for review_dict method"""
+=======
+class TestReview_to_dict(unittest.TestCase):
+    """testing to_dict method of the Review class."""
+
+>>>>>>> 8b4a7ab1d5f2da79ec031db68409da71b8bd5bef
     def test_to_dict_type(self):
         self.assertTrue(dict, type(Review().to_dict()))
 
