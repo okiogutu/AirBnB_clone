@@ -1,24 +1,12 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-""" testing city """
-import unittest
-import os
-import models
-=======
 """Unittest module for the City Class"""
 import unittest
 import models
 import os
->>>>>>> 8b4a7ab1d5f2da79ec031db68409da71b8bd5bef
 from datetime import datetime
 from time import sleep
 from models.city import City
 
-<<<<<<< HEAD
-
-class TestCity_instantiation(unittest.TestCase):
-	"""Unit tests fir city instantiation"""
-=======
 class TestCity_save(unittest.TestCase):
     """testing save method of the City class."""
 
@@ -68,11 +56,9 @@ class TestCity_save(unittest.TestCase):
         cyid = "City." + cy.id
         with open("file.json", "r") as f:
             self.assertIn(cyid, f.read())
-
 class TestCity_instantiation(unittest.TestCase):
     """testing instantiation of the City class."""
 
->>>>>>> 8b4a7ab1d5f2da79ec031db68409da71b8bd5bef
     def test_no_args_instantiates(self):
         self.assertEqual(City, type(City()))
 
@@ -144,71 +130,10 @@ class TestCity_instantiation(unittest.TestCase):
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             City(id=None, created_at=None, updated_at=None)
-<<<<<<< HEAD
-
-
-class TestCity_save(unittest.TestCase):
-    """Unittests for city class save method"""
-=======
-class TestCity_save(unittest.TestCase):
-    """Unittests for testing save method of the City class."""
-
->>>>>>> 8b4a7ab1d5f2da79ec031db68409da71b8bd5bef
-    @classmethod
-    def setUp(self):
-        try:
-            os.rename("file.json", "tmp")
-        except IOError:
-            pass
-
-    def tearDown(self):
-        try:
-            os.remove("file.json")
-        except IOError:
-            pass
-        try:
-            os.rename("tmp", "file.json")
-        except IOError:
-            pass
-
-    def test_one_save(self):
-        cy = City()
-        sleep(0.05)
-        first_updated_at = cy.updated_at
-        cy.save()
-        self.assertLess(first_updated_at, cy.updated_at)
-
-    def test_two_saves(self):
-        cy = City()
-        sleep(0.05)
-        first_updated_at = cy.updated_at
-        cy.save()
-        second_updated_at = cy.updated_at
-        self.assertLess(first_updated_at, second_updated_at)
-        sleep(0.05)
-        cy.save()
-        self.assertLess(second_updated_at, cy.updated_at)
-
-    def test_save_with_arg(self):
-        cy = City()
-        with self.assertRaises(TypeError):
-            cy.save(None)
-
-    def test_save_updates_file(self):
-        cy = City()
-        cy.save()
-        cyid = "City." + cy.id
-        with open("file.json", "r") as f:
-            self.assertIn(cyid, f.read())
-
 
 class TestCity_to_dict(unittest.TestCase):
-<<<<<<< HEAD
-    """Unittests for dict method"""
-=======
     """testing to_dict method of the City class."""
 
->>>>>>> 8b4a7ab1d5f2da79ec031db68409da71b8bd5bef
     def test_to_dict_type(self):
         self.assertTrue(dict, type(City().to_dict()))
 
