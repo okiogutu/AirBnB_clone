@@ -33,7 +33,8 @@ class BaseModel:
         of BaseModel instances"""
         clname = self.__class__.__name__
         return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
-     def to_dict(self):
+
+    def to_dict(self):
         """Returns a dictionary that contains all
         keys/values of the instance"""
         rdict = self.__dict__.copy()
@@ -41,8 +42,3 @@ class BaseModel:
         rdict["updated_at"] = self.updated_at.isoformat()
         rdict["__class__"] = self.__class__.__name__
         return rdict
-
-    def __str__(self):
-        """Return the print/str representation of the BaseModel instance."""
-        clname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
