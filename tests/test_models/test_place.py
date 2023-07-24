@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" testing Review """
+""" testing Place """
 import os
 import models
 import unittest
@@ -9,6 +9,7 @@ from models.place import Place
 
 
 class TestPlace_instantiation(unittest.TestCase):
+    """Unittests for place method"""
     def test_no_args_instantiates(self):
         self.assertEqual(Place, type(Place()))
 
@@ -135,8 +136,9 @@ class TestPlace_instantiation(unittest.TestCase):
         with self.assertRaises(TypeError):
             Place(id=None, created_at=None, updated_at=None)
 
+
 class TestPlace_save(unittest.TestCase):
-	"""Unit tests for save method of place"""
+    """Unittests for place class"""
     @classmethod
     def setUp(self):
         try:
@@ -184,8 +186,10 @@ class TestPlace_save(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertIn(plid, f.read())
 
+
 class TestPlace_to_dict(unittest.TestCase):
-	"""unit test for dict_method of the place class"""
+    """Unittests for testing to_dict method of the Place class."""
+
     def test_to_dict_type(self):
         self.assertTrue(dict, type(Place().to_dict()))
 
